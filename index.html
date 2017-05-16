@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Resume</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <style>
+        body {
+            height: 100%;
+        }
+        
+        #left {
+            background-color: #22313F;
+            color: white;
+            height: 100%;
+            padding: 20px 40px 20px 40px;
+        }
+        
+        #company-name {
+            color: limegreen;
+        }
+        
+        #exp {
+            border-bottom: 1px solid grey;
+        }
+        
+        #year {
+            float: right;
+            color: limegreen;
+        }
+        
+        #uni-name {
+            color: limegreen;
+        }
+        
+        .uni-class {
+            display: inline-block;
+        }
+        
+        .fa {
+            color: limegreen;
+            padding-right: 10px;
+        }
+    </style>
+
+
+
+</head>
+
+<body class="container">
+
+    <div ng-app="myApp">
+
+
+        <div class="row">
+            <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12" id="left">
+
+
+
+                <div ng-controller="contactCtrl">
+                    <contact></contact>
+                </div>
+
+                <div ng-controller="skillsCtrl as vm">
+                    <skills data="vm.skills"></skills>
+                </div>
+
+
+                <div ng-controller="refCtrl as vm">
+                    <ref data="vm.references"></ref>
+                </div>
+
+            </div>
+            <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12">
+
+                <div ng-controller="profileCtrl as vm">
+                    <profile></profile>
+                </div>
+
+                <div ng-controller="expCtrl as vm">
+                    <experience data="vm.skills"></experience>
+                </div>
+
+                <div ng-controller="educationCtrl as vm">
+                    <education data="vm.education"></education>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+
+
+
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

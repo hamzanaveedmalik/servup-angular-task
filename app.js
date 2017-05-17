@@ -71,42 +71,70 @@ angular
 })
 
 
-.controller('expCtrl', function CountCtrl($http) {
+
+.factory('JsonService', function($http) {
+
+     var _getData = function() {
+        return $http.get('data.json');
+    };
+
+    return{
+        getData: _getData
+    };
+
+
+})
+
+
+.controller('expCtrl', function CountCtrl($http, JsonService, $scope) {
     var vm = this;
     vm.heading = 'PROFESSIONAL EXPERIENCES';
 
-    vm.skills = [    
-        {
-            "company": "Tune.pk",
-            "post": "Product Head",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea non laudantium minus earum possimus tenetur, amet atque officiis cum temporibus autem, nesciunt sunt vel ab odio placeat vitae tempore provident.",
-            "jyear": 2017,
-            "lyear": 'PRESENT'
-    },
+    //  JsonService.getData().then(function(response) {
+    //     $scope.skills = response.data;
+    //     console.log(skills);
+    // });
 
-        {
-            "company": "Tune.pk",
-            "post": "Product Head",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea non laudantium minus earum possimus tenetur, amet atque officiis cum temporibus autem, nesciunt sunt vel ab odio placeat vitae tempore provident.",
-            "jyear": 2015,
-            "lyear": 2017
-    },
+$http({
+  method: 'GET',
+  url: './data.json'
+}).then(function successCallback(response) {
+    vm.skills = response.data;
+      console.log(skills);
+  });
 
-        {
-            "company": "ItsyBitsy",
-            "post": "Co-founder",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea non laudantium minus earum possimus tenetur, amet atque officiis cum temporibus autem, nesciunt sunt vel ab odio placeat vitae tempore provident.",
-            "jyear": 2010,
-            "lyear": 2008
-    }
-]
+//     vm.skills = [    
+//         {
+//             "company": "ibrand studio",
+//             "post": "web and graphic designer",
+//             "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea non laudantium minus earum possimus tenetur, amet atque officiis cum temporibus autem, nesciunt sunt vel ab odio placeat vitae tempore provident.",
+//             "jyear": 2012,
+//             "lyear": 'PRESENT'
+//     },
+
+//         {
+//             "company": "ibrand studio",
+//             "post": "web and graphic designer",
+//             "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea non laudantium minus earum possimus tenetur, amet atque officiis cum temporibus autem, nesciunt sunt vel ab odio placeat vitae tempore provident.",
+//             "jyear": 2010,
+//             "lyear": 2012
+//     },
+
+//         {
+//             "company": "ibrand studio",
+//             "post": "web and graphic designer",
+//             "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea non laudantium minus earum possimus tenetur, amet atque officiis cum temporibus autem, nesciunt sunt vel ab odio placeat vitae tempore provident.",
+//             "jyear": 2010,
+//             "lyear": 2008
+//     }
+// ]
 })
 
 .component('experience', {
     controller: 'expCtrl',
     template: [
         '<h1> {{$ctrl.heading}} </h1>',
-        '<div id="exp" ng-repeat="name in $ctrl.data">',
+        '<div id="exp" ng-repeat="name in $ctrl.skills">',
         '<h3 id="company-name"> {{name.company}} </h3>',
         '<b>{{name.post}}</b> ',
            '<b id="year">{{name.jyear}} - {{name.lyear}} </b> ',
@@ -128,7 +156,7 @@ angular
     //    });
 
     vm.education = [
-     
+    
         {
             "institute": "NUST-SEECS",
             "location": "Islamabad, PK",
